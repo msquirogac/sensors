@@ -4,18 +4,18 @@
 void BMP280_Init(BMP280_HandleTypeDef *bmp280)
 {
 	BMP280_InitTypeDef *init = &bmp280->Init;
-	uint8_t data;
-	data = init->TempOSR | init->PressOSR | init->Mode;
-	BMP280_Write(BMP280_REG_CTRL_MEAS, &data, 1);
-	data = init->Standby | init->Filter | init->SPIMode;
-	BMP280_Write(BMP280_REG_CONFIG, &data, 1);
+	uint8_t tmpreg;
+	tmpreg = init->TempOSR | init->PressOSR | init->Mode;
+	BMP280_Write(BMP280_REG_CTRL_MEAS, &tmpreg, 1);
+	tmpreg = init->Standby | init->Filter | init->SPIMode;
+	BMP280_Write(BMP280_REG_CONFIG, &tmpreg, 1);
 	BMP280_GetCalibParams(bmp280);
 }
 
 void BMP280_Reset(BMP280_HandleTypeDef *bmp280)
 {
-	uint8_t data = BMP280_RESET;
-	BMP280_Write(BMP280_REG_RESET, &data, 1);
+	uint8_t tmpreg = BMP280_RESET;
+	BMP280_Write(BMP280_REG_RESET, &tmpreg, 1);
 }
 
 void BMP280_GetCalibParams(BMP280_HandleTypeDef *bmp280)
@@ -39,26 +39,26 @@ void BMP280_GetCalibParams(BMP280_HandleTypeDef *bmp280)
 
 uint8_t BMP280_GetID(BMP280_HandleTypeDef *bmp280)
 {
-	uint8_t data;
-	BMP280_Read(BMP280_REG_ID, &data, 1);
-	return data;
+	uint8_t tmpreg;
+	BMP280_Read(BMP280_REG_ID, &tmpreg, 1);
+	return tmpreg;
 }
 
 uint8_t BMP280_GetStatus(BMP280_HandleTypeDef *bmp280)
 {
-	uint8_t data;
-	BMP280_Read(BMP280_REG_STATUS, &data, 1);
-	return data;
+	uint8_t tmpreg;
+	BMP280_Read(BMP280_REG_STATUS, &tmpreg, 1);
+	return tmpreg;
 }
 
 int32_t BMP280_GetTemperature(BMP280_HandleTypeDef *bmp280)
 {
 	int32_t adcvalue;
-	uint8_t data[3];
-	BMP280_Read(BMP280_REG_TEMP_MSB, data, 3);
-	adcvalue = data[0];
-	adcvalue = (adcvalue << 8) | data[1];
-	adcvalue = (adcvalue << 8) | data[2];
+	uint8_t tmpreg[3];
+	BMP280_Read(BMP280_REG_TEMP_MSB, tmpreg, 3);
+	adcvalue = tmpreg[0];
+	adcvalue = (adcvalue << 8) | tmpreg[1];
+	adcvalue = (adcvalue << 8) | tmpreg[2];
 	adcvalue = (adcvalue >> 4);
 	return adcvalue;
 }
@@ -66,11 +66,11 @@ int32_t BMP280_GetTemperature(BMP280_HandleTypeDef *bmp280)
 int32_t BMP280_GetPressure(BMP280_HandleTypeDef *bmp280)
 {
 	int32_t adcvalue;
-	uint8_t data[3];
-	BMP280_Read(BMP280_REG_PRESS_MSB, data, 3);
-	adcvalue = data[0];
-	adcvalue = (adcvalue << 8) | data[1];
-	adcvalue = (adcvalue << 8) | data[2];
+	uint8_t tmpreg[3];
+	BMP280_Read(BMP280_REG_PRESS_MSB, tmpreg, 3);
+	adcvalue = tmpreg[0];
+	adcvalue = (adcvalue << 8) | tmpreg[1];
+	adcvalue = (adcvalue << 8) | tmpreg[2];
 	adcvalue = (adcvalue >> 4);
 	return adcvalue;
 }
