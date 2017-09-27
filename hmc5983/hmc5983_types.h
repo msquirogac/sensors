@@ -1,4 +1,11 @@
+#ifndef __HMC5983_TYPES
+#define __HMC5983_TYPES
+
+#include <stddef.h>
 #include <stdint.h>
+
+typedef void (*HMC5983_ReadHandler)(uint8_t Address, uint8_t *Buffer, size_t NumBytes);
+typedef void (*HMC5983_WriteHandler)(uint8_t Address, uint8_t *Buffer, size_t NumBytes);
 
 typedef struct
 {
@@ -11,5 +18,14 @@ typedef struct
 
 typedef struct
 {
+	const HMC5983_ReadHandler Read;
+	const HMC5983_WriteHandler Write;
+} HMC5983_HalTypeDef;
+
+typedef struct
+{
 	HMC5983_InitTypeDef Init;
+	HMC5983_HalTypeDef HAL;
 } HMC5983_HandleTypeDef;
+
+#endif
