@@ -1,4 +1,6 @@
 
+#define BMP280_READ_FLAG      0x80
+
 #define BMP280_REG_ID         0xD0
 #define BMP280_REG_RESET      0xE0
 #define BMP280_REG_STATUS     0xF3
@@ -40,7 +42,6 @@
 #define BMP280_REG_CALIB_24   0xA0
 #define BMP280_REG_CALIB_25   0xA1
 
-#define BMP280_READ_MASK      0x80
 #define BMP280_OSR_TEMP_MASK  0xE0
 #define BMP280_OSR_PRESS_MASK 0x1C
 #define BMP280_MODE_MASK      0x03
