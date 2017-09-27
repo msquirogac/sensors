@@ -1,11 +1,5 @@
 #include "bmp280_api.h"
 #include "bmp280_types.h"
-#include <stddef.h>
-
-extern void BMP280_Read(uint8_t Address, uint8_t *Buffer, size_t NumBytes);
-extern void BMP280_Write(uint8_t Address, uint8_t *Buffer, size_t NumBytes);
-
-//*************************************************************************************//
 
 void BMP280_Init(BMP280_HandleTypeDef *bmp280);
 void BMP280_Reset(BMP280_HandleTypeDef *bmp280);

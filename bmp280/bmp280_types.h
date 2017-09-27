@@ -1,7 +1,11 @@
 #ifndef __BMP280_TYPES
 #define __BMP280_TYPES
 
+#include <stddef.h>
 #include <stdint.h>
+
+typedef void (*BMP280_ReadHandler)(uint8_t Address, uint8_t *Buffer, size_t NumBytes);
+typedef void (*BMP280_WriteHandler)(uint8_t Address, uint8_t *Buffer, size_t NumBytes);
 
 typedef struct
 {
@@ -36,9 +40,16 @@ typedef struct
 
 typedef struct
 {
+	const BMP280_ReadHandler Read;
+	const BMP280_WriteHandler Write;
+} BMP280_HalTypeDef;
+
+typedef struct
+{
 	BMP280_InitTypeDef Init;
 	BMP280_CParamsTypeDef CParams;
 	BMP280_IntVarsTypeDef IntVars;
+	BMP280_HalTypeDef HAL;
 } BMP280_HandleTypeDef;
 
 #endif
