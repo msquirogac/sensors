@@ -1,10 +1,5 @@
 #include "ms5611_api.h"
 #include "ms5611_types.h"
-#include <stddef.h>
-
-extern void MS5611_SendCommand(uint8_t Command, uint8_t *Buffer, size_t NumBytes);
-
-//*************************************************************************************//
 
 void MS5611_Init(MS5611_HandleTypeDef *ms5611);
 void MS5611_Reset(MS5611_HandleTypeDef *ms5611);
