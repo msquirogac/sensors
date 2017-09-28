@@ -1,8 +1,12 @@
-#ifndef __BMP280_TYPES
-#define __BMP280_TYPES
+#ifndef __BMP280_TYPES_H
+#define __BMP280_TYPES_H
 
 #include <stddef.h>
 #include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
 
 typedef void (*BMP280_ReadHandler)(uint8_t Address, uint8_t *Buffer, size_t NumBytes);
 typedef void (*BMP280_WriteHandler)(uint8_t Address, uint8_t *Buffer, size_t NumBytes);
@@ -52,4 +56,7 @@ typedef struct
 	BMP280_HalTypeDef HAL;
 } BMP280_HandleTypeDef;
 
-#endif
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+#endif /* __BMP280_TYPES_H */

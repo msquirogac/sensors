@@ -1,8 +1,12 @@
-#ifndef __MS5611_TYPES
-#define __MS5611_TYPES
+#ifndef __MS5611_TYPES_H
+#define __MS5611_TYPES_H
 
 #include <stddef.h>
 #include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
 
 typedef void (*MS5611_CommandHandler)(uint8_t Command, uint8_t *Buffer, size_t NumBytes);
 
@@ -44,4 +48,7 @@ typedef struct
 	MS5611_HalTypeDef HAL;
 } MS5611_HandleTypeDef;
 
-#endif
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+#endif /* __MS5611_TYPES_H */

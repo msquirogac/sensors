@@ -1,5 +1,5 @@
-#ifndef __HMC5983_TYPES
-#define __HMC5983_TYPES
+#ifndef __HMC5983_TYPES_H
+#define __HMC5983_TYPES_H
 
 #include <stddef.h>
 #include <stdint.h>
@@ -28,4 +28,7 @@ typedef struct
 	HMC5983_HalTypeDef HAL;
 } HMC5983_HandleTypeDef;
 
-#endif
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+#endif /* __HMC5983_TYPES_H */
