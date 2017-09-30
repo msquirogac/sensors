@@ -1,5 +1,5 @@
-#define BMP280_I2C_ADDR1      (0x76<<1)
-#define BMP280_I2C_ADDR2      (0x77<<1)
+#define BMP280_I2C_ADDR1      0xEC // 0x76
+#define BMP280_I2C_ADDR2      0xEE // 0x77
 
 #define BMP280_READ_FLAG      0x80
 

@@ -1,3 +1,5 @@
+#define MPU9250_I2C_ADDR1           0xD0
+#define MPU9250_I2C_ADDR2           0xD2
 
 #define MPU9250_READ_FLAG						0x80
 
@@ -114,36 +116,21 @@
 #define MPU9250_INT_ENABLE          0x38
 #define MPU9250_INT_STATUS          0x3A
 
-
-#define MPU9250_ACCEL_SENSITIVITY_2G		((float) 16384) /* accelerometer sensitivity for 2g full scale [LSB/g] */
-#define MPU9250_ACCEL_SENSITIVITY_4G		((float) 8192)	/* accelerometer sensitivity for 4g full scale [LSB/g] */
-#define MPU9250_ACCEL_SENSITIVITY_8G		((float) 4096)	/* accelerometer sensitivity for 8g full scale [LSB/g] */
-#define MPU9250_ACCEL_SENSITIVITY_16G		((float) 2048)	/* accelerometer sensitivity for 16g full scale [LSB/g] */
-#define MPU9250_GYRO_SENSITIVITY_250		((float) 131)		/* gyroscope sensitivity for 250 dps full scale [LSB/dps] */
-#define MPU9250_GYRO_SENSITIVITY_500		((float) 65.5)	/* gyroscope sensitivity for 500 dps full scale [LSB/dps] */
-#define MPU9250_GYRO_SENSITIVITY_1000		((float) 32.8)	/* gyroscope sensitivity for 1000 dps full scale [LSB/dps] */
-#define MPU9250_GYRO_SENSITIVITY_2000		((float) 16.4)	/* gyroscope sensitivity for 2000 dps full scale [LSB/dps] */
-
-
 #define	MPU9250_H_RESET									((uint8_t) 0x80)	/* Reset the internal registers and restores the default settings */
-
 #define	MPU9250_ACCEL_FS_2G							((uint8_t) 0x00)	/* Full scale = 2G */
 #define	MPU9250_ACCEL_FS_4G							((uint8_t) 0x08)	/* Full scale = 4G */
 #define	MPU9250_ACCEL_FS_8G							((uint8_t) 0x10)	/* Full scale = 8G */
 #define	MPU9250_ACCEL_FS_16G						((uint8_t) 0x18)	/* Full scale = 16G */
-
 #define	MPU9250_GYRO_FS_250							((uint8_t) 0x00)	/* Full scale = 250 dps */
 #define	MPU9250_GYRO_FS_500							((uint8_t) 0x08)	/* Full scale = 500 dps */
 #define	MPU9250_GYRO_FS_1000						((uint8_t) 0x10)	/* Full scale = 1000 dps */
 #define	MPU9250_GYRO_FS_2000						((uint8_t) 0x18)	/* Full scale = 2000 dps */
-
 #define MPU9250_AX_ENABLE								((uint8_t) 0x20)	/* Enable Accel X */
 #define MPU9250_AY_ENABLE								((uint8_t) 0x10)	/* Enable Accel Y */
 #define MPU9250_AZ_ENABLE								((uint8_t) 0x08)	/* Enable Accel Z */
 #define MPU9250_GX_ENABLE								((uint8_t) 0x04)	/* Enable Gyro X */
 #define MPU9250_GY_ENABLE								((uint8_t) 0x02)	/* Enable Gyro Y */
 #define MPU9250_GZ_ENABLE								((uint8_t) 0x01)	/* Enable Gyro Z */
-
 #define MPU9250_DLPF_CFG_0							((uint8_t) 0x00)
 #define MPU9250_DLPF_CFG_1							((uint8_t) 0x01)
 #define MPU9250_DLPF_CFG_2							((uint8_t) 0x02)
@@ -152,7 +139,6 @@
 #define MPU9250_DLPF_CFG_5							((uint8_t) 0x05)
 #define MPU9250_DLPF_CFG_6							((uint8_t) 0x06)
 #define MPU9250_DLPF_CFG_7							((uint8_t) 0x07)
-
 #define MPU9250_CLKSEL_0								((uint8_t) 0x00)
 #define MPU9250_CLKSEL_1								((uint8_t) 0x01)
 #define MPU9250_CLKSEL_2								((uint8_t) 0x02)
@@ -161,27 +147,24 @@
 #define MPU9250_CLKSEL_5								((uint8_t) 0x05)
 #define MPU9250_CLKSEL_6								((uint8_t) 0x06)
 #define MPU9250_CLKSEL_7								((uint8_t) 0x07)
-
 #define MPU9250_INT_WOM									((uint8_t) 0x40)
 #define MPU9250_INT_FIFO_OVERFLOW				((uint8_t) 0x10)
 #define MPU9250_INT_DATA_RDY						((uint8_t) 0x01)
-
 #define MPU9250_INT_LOGIC_LEVEL_LOW			((uint8_t) 0x80)
 #define MPU9250_INT_LOGIC_LEVEL_HIGH		((uint8_t) 0x00)
 #define MPU9250_INT_PIN_HELD						((uint8_t) 0x20)
 #define MPU9250_INT_PIN_PULSE						((uint8_t) 0x00)
 #define MPU9250_INT_ANY_READ_CLEAR			((uint8_t) 0x10)
 #define MPU9250_INT_ONLY_STATUS_CLEAR		((uint8_t) 0x00)
-
 #define MPU9250_FIFO_FULL_REPLACE				((uint8_t) 0x00)
 #define MPU9250_FIFO_FULL_KEEP					((uint8_t) 0x01)
 
 
 // Magnetometer AK8963
 #define AK8963_I2C_ADDR									((uint8_t) 0x0C)
+
 #define AK8963_WIA											((uint8_t) 0x00)
 #define AK8963_INFO											((uint8_t) 0x01)
-
 #define AK8963_HXL											((uint8_t) 0x03)
 #define AK8963_HXH											((uint8_t) 0x04)
 #define AK8963_HYL											((uint8_t) 0x05)
@@ -199,19 +182,22 @@
 #define AK8963_ASAY											((uint8_t) 0x11)
 #define AK8963_ASAZ											((uint8_t) 0x12)
 
-
-#define AK8963_SENSITIVITY_14bit				((float) 0.6)	   /* Magnetometer sensitivity for 14bit resolution [uT/LSB] */
-#define AK8963_SENSITIVITY_16bit				((float) 0.15)   /* Magnetometer sensitivity for 14bit resolution [uT/LSB] */
-
-
 #define	AK8963_POWER_DOWN								((uint8_t) 0x00) /* Power-Down mode */
 #define AK8963_SINGLE_MEASUREMENT				((uint8_t) 0x01) /* Single Measurement Mode */
 #define AK8963_CONTINUOS_MEASUREMENT1		((uint8_t) 0x02) /* Continuous Measurement Mode 1 */
 #define AK8963_CONTINUOS_MEASUREMENT2		((uint8_t) 0x06) /* Continuous Measurement Mode 1 */
 #define AK8963_SELF_TEST								((uint8_t) 0x08) /* Self-test mode */
 #define AK8963_FUSE_ROM									((uint8_t) 0x0F) /* Fuse ROM access mode */
-
 #define	AK8963_RESOLUTION_14bit					((uint8_t) 0x00) /* Resolution 14Bit */
 #define	AK8963_RESOLUTION_16bit					((uint8_t) 0x10) /* Resolution 16Bit */
 
-
+#define MPU9250_ACCEL_SENSITIVITY_2G		((float) 16384) /* accelerometer sensitivity for 2g full scale [LSB/g] */
+#define MPU9250_ACCEL_SENSITIVITY_4G		((float) 8192)	/* accelerometer sensitivity for 4g full scale [LSB/g] */
+#define MPU9250_ACCEL_SENSITIVITY_8G		((float) 4096)	/* accelerometer sensitivity for 8g full scale [LSB/g] */
+#define MPU9250_ACCEL_SENSITIVITY_16G		((float) 2048)	/* accelerometer sensitivity for 16g full scale [LSB/g] */
+#define MPU9250_GYRO_SENSITIVITY_250		((float) 131)		/* gyroscope sensitivity for 250 dps full scale [LSB/dps] */
+#define MPU9250_GYRO_SENSITIVITY_500		((float) 65.5)	/* gyroscope sensitivity for 500 dps full scale [LSB/dps] */
+#define MPU9250_GYRO_SENSITIVITY_1000		((float) 32.8)	/* gyroscope sensitivity for 1000 dps full scale [LSB/dps] */
+#define MPU9250_GYRO_SENSITIVITY_2000		((float) 16.4)	/* gyroscope sensitivity for 2000 dps full scale [LSB/dps] */
+#define AK8963_SENSITIVITY_14bit				((float) 0.6)	  /* Magnetometer sensitivity for 14bit resolution [uT/LSB] */
+#define AK8963_SENSITIVITY_16bit				((float) 0.15)  /* Magnetometer sensitivity for 14bit resolution [uT/LSB] */

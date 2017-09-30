@@ -1,3 +1,4 @@
+#define HMC5983_I2C_ADDR            0x3C
 
 #define HMC5983_READ_FLAG						0x80
 #define HMC5983_MULTI_FLAG					0x40

@@ -1,3 +1,5 @@
+#define MS5611_I2C_ADDR1          0xEC
+#define MS5611_I2C_ADDR2          0xEE
 
 #define MS5611_CMD_RESET					0x1E // ADC reset command
 #define MS5611_CMD_ADC_READ				0x00 // ADC read command
