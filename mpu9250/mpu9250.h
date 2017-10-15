@@ -21,10 +21,10 @@ uint8_t MPU9250_GetMagnetID(MPU9250_HandleTypeDef *mpu9250);
 
 //*************************************************************************************//
 
-void MPU9250_GetTemperature(MPU9250_HandleTypeDef *mpu9250, int32_t *adcvalue);
-void MPU9250_GetGyroscope(MPU9250_HandleTypeDef *mpu9250, int32_t *adcvalue);
-void MPU9250_GetAccelerometer(MPU9250_HandleTypeDef *mpu9250, int32_t *adcvalue);
-void MPU9250_GetMagnetometer(MPU9250_HandleTypeDef *mpu9250, int32_t *adcvalue);
+void MPU9250_GetTemperature(MPU9250_HandleTypeDef *mpu9250, int16_t *adcvalue);
+void MPU9250_GetGyroscope(MPU9250_HandleTypeDef *mpu9250, int16_t *adcvalue);
+void MPU9250_GetAccelerometer(MPU9250_HandleTypeDef *mpu9250, int16_t *adcvalue);
+void MPU9250_GetMagnetometer(MPU9250_HandleTypeDef *mpu9250, int16_t *adcvalue);
 
 #ifdef __cplusplus
 }

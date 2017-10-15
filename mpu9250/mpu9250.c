@@ -106,7 +106,7 @@ uint8_t MPU9250_GetMagnetID(MPU9250_HandleTypeDef *mpu9250)
 
 //*************************************************************************************//
 
-void MPU9250_GetTemperature(MPU9250_HandleTypeDef *mpu9250, int32_t *adcvalue)
+void MPU9250_GetTemperature(MPU9250_HandleTypeDef *mpu9250, int16_t *adcvalue)
 {
 	MPU9250_ReadHandler read = mpu9250->HAL.Read;
 	uint8_t tmpreg[2];
@@ -114,7 +114,7 @@ void MPU9250_GetTemperature(MPU9250_HandleTypeDef *mpu9250, int32_t *adcvalue)
 	adcvalue[0] = (int16_t)(((uint16_t)tmpreg[0] << 8) | tmpreg[1]);
 }
 
-void MPU9250_GetGyroscope(MPU9250_HandleTypeDef *mpu9250, int32_t *adcvalue)
+void MPU9250_GetGyroscope(MPU9250_HandleTypeDef *mpu9250, int16_t *adcvalue)
 {
 	MPU9250_ReadHandler read = mpu9250->HAL.Read;
 	uint8_t tmpreg[6];
@@ -124,7 +124,7 @@ void MPU9250_GetGyroscope(MPU9250_HandleTypeDef *mpu9250, int32_t *adcvalue)
 	adcvalue[2] = (int16_t)(((uint16_t)tmpreg[4] << 8) | tmpreg[5]);
 }
 
-void MPU9250_GetAccelerometer(MPU9250_HandleTypeDef *mpu9250, int32_t *adcvalue)
+void MPU9250_GetAccelerometer(MPU9250_HandleTypeDef *mpu9250, int16_t *adcvalue)
 {
 	MPU9250_ReadHandler read = mpu9250->HAL.Read;
 	uint8_t tmpreg[6];
@@ -134,7 +134,7 @@ void MPU9250_GetAccelerometer(MPU9250_HandleTypeDef *mpu9250, int32_t *adcvalue)
 	adcvalue[2] = (int16_t)(((uint16_t)tmpreg[4] << 8) | tmpreg[5]);
 }
 
-void MPU9250_GetMagnetometer(MPU9250_HandleTypeDef *mpu9250, int32_t *adcvalue)
+void MPU9250_GetMagnetometer(MPU9250_HandleTypeDef *mpu9250, int16_t *adcvalue)
 {
 	MPU9250_ReadHandler read = mpu9250->HAL.Read;
 	uint8_t tmpreg[6];

@@ -33,27 +33,20 @@ uint8_t HMC5983_GetStatus(HMC5983_HandleTypeDef *hmc5983)
 
 //*************************************************************************************//
 
-void HMC5983_GetMagnetometer(HMC5983_HandleTypeDef *hmc5983, int32_t *adcvalue)
+void HMC5983_GetMagnetometer(HMC5983_HandleTypeDef *hmc5983, int16_t *adcvalue)
 {
 	HMC5983_ReadHandler read = hmc5983->HAL.Read;
 	uint8_t tmpreg[6];
-	int16_t rawdata[3];
 	read(HMC5983_DXRA, tmpreg, 6);
-	for(size_t i = 0; i < 3; i++)
-	{
-		rawdata[i] = (int16_t)(((uint16_t)tmpreg[2 * i] << 8) | tmpreg[2 * i + 1]);
-	}
-	adcvalue[0] = (int32_t)rawdata[0];
-	adcvalue[1] = (int32_t)rawdata[2];
-	adcvalue[2] = (int32_t)rawdata[1];
+	adcvalue[0] = (int16_t)(((uint16_t)tmpreg[0] << 8) | tmpreg[1]);
+	adcvalue[1] = (int16_t)(((uint16_t)tmpreg[4] << 8) | tmpreg[5]);
+	adcvalue[2] = (int16_t)(((uint16_t)tmpreg[2] << 8) | tmpreg[3]);
 }
 
-void HMC5983_GetTemperature(HMC5983_HandleTypeDef *hmc5983, int32_t *adcvalue)
+void HMC5983_GetTemperature(HMC5983_HandleTypeDef *hmc5983, int16_t *adcvalue)
 {
 	HMC5983_ReadHandler read = hmc5983->HAL.Read;
 	uint8_t tmpreg[2];
-	int16_t rawdata[1];
 	read(HMC5983_TEMPH, tmpreg, 2);
-	rawdata[0] = (int16_t)(((uint16_t)tmpreg[0] << 8) | tmpreg[1]);
-	adcvalue[0] = (int32_t)rawdata[0];
+	adcvalue[0] = (int16_t)(((uint16_t)tmpreg[0] << 8) | tmpreg[1]);
 }
