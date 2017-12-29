@@ -8,17 +8,17 @@
 extern "C" {
 #endif /* __cplusplus */
 
-void HMC5983_Init(HMC5983_HandleTypeDef *hmc5983);
+void HMC5983_Init(HMC5983_HandleTypeDef *hsensor);
 
 //*************************************************************************************//
 
-uint8_t HMC5983_GetID(HMC5983_HandleTypeDef *hmc5983);
-uint8_t HMC5983_GetStatus(HMC5983_HandleTypeDef *hmc5983);
+uint8_t HMC5983_GetID(HMC5983_HandleTypeDef *hsensor);
+uint8_t HMC5983_GetStatus(HMC5983_HandleTypeDef *hsensor);
 
 //*************************************************************************************//
 
-void HMC5983_GetMagnetometer(HMC5983_HandleTypeDef *hmc5983, int16_t *adcvalue);
-void HMC5983_GetTemperature(HMC5983_HandleTypeDef *hmc5983, int16_t *adcvalue);
+void HMC5983_GetMagnetometer(HMC5983_HandleTypeDef *hsensor, int16_t *adcvalue);
+void HMC5983_GetTemperature(HMC5983_HandleTypeDef *hsensor, int16_t *adcvalue);
 
 #ifdef __cplusplus
 }

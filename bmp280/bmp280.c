@@ -1,29 +1,29 @@
 #include "bmp280.h"
 #include <math.h>
 
-void BMP280_Init(BMP280_HandleTypeDef *bmp280)
+void BMP280_Init(BMP280_HandleTypeDef *hsensor)
 {
-	BMP280_WriteHandler write = bmp280->HAL.Write;
-	BMP280_InitTypeDef *init = &bmp280->Init;
+	BMP280_WriteHandler write = hsensor->HAL.Write;
+	BMP280_InitTypeDef *init = &hsensor->Init;
 	uint8_t tmpreg;
 	tmpreg = init->TempOSR | init->PressOSR | init->Mode;
 	write(BMP280_REG_CTRL_MEAS, &tmpreg, 1);
 	tmpreg = init->Standby | init->Filter | init->SPIMode;
 	write(BMP280_REG_CONFIG, &tmpreg, 1);
-	BMP280_GetCalibParams(bmp280);
+	BMP280_GetCalibParams(hsensor);
 }
 
-void BMP280_Reset(BMP280_HandleTypeDef *bmp280)
+void BMP280_Reset(BMP280_HandleTypeDef *hsensor)
 {
-	BMP280_WriteHandler write = bmp280->HAL.Write;
+	BMP280_WriteHandler write = hsensor->HAL.Write;
 	uint8_t tmpreg = BMP280_RESET;
 	write(BMP280_REG_RESET, &tmpreg, 1);
 }
 
-void BMP280_GetCalibParams(BMP280_HandleTypeDef *bmp280)
+void BMP280_GetCalibParams(BMP280_HandleTypeDef *hsensor)
 {
-	BMP280_ReadHandler read = bmp280->HAL.Read;
-	BMP280_CParamsTypeDef *cparams = &bmp280->CParams;
+	BMP280_ReadHandler read = hsensor->HAL.Read;
+	BMP280_CParamsTypeDef *cparams = &hsensor->CParams;
 	read(BMP280_REG_CALIB_00, (uint8_t *)&cparams->dig_T1, 2);
 	read(BMP280_REG_CALIB_02, (uint8_t *)&cparams->dig_T2, 2);
 	read(BMP280_REG_CALIB_04, (uint8_t *)&cparams->dig_T3, 2);
@@ -40,25 +40,25 @@ void BMP280_GetCalibParams(BMP280_HandleTypeDef *bmp280)
 
 //*************************************************************************************//
 
-uint8_t BMP280_GetID(BMP280_HandleTypeDef *bmp280)
+uint8_t BMP280_GetID(BMP280_HandleTypeDef *hsensor)
 {
-	BMP280_ReadHandler read = bmp280->HAL.Read;
+	BMP280_ReadHandler read = hsensor->HAL.Read;
 	uint8_t tmpreg;
 	read(BMP280_REG_ID, &tmpreg, 1);
 	return tmpreg;
 }
 
-uint8_t BMP280_GetStatus(BMP280_HandleTypeDef *bmp280)
+uint8_t BMP280_GetStatus(BMP280_HandleTypeDef *hsensor)
 {
-	BMP280_ReadHandler read = bmp280->HAL.Read;
+	BMP280_ReadHandler read = hsensor->HAL.Read;
 	uint8_t tmpreg;
 	read(BMP280_REG_STATUS, &tmpreg, 1);
 	return tmpreg;
 }
 
-int32_t BMP280_GetTemperature(BMP280_HandleTypeDef *bmp280)
+int32_t BMP280_GetTemperature(BMP280_HandleTypeDef *hsensor)
 {
-	BMP280_ReadHandler read = bmp280->HAL.Read;
+	BMP280_ReadHandler read = hsensor->HAL.Read;
 	int32_t adcvalue;
 	uint8_t tmpreg[3];
 	read(BMP280_REG_TEMP_MSB, tmpreg, 3);
@@ -69,9 +69,9 @@ int32_t BMP280_GetTemperature(BMP280_HandleTypeDef *bmp280)
 	return adcvalue;
 }
 
-int32_t BMP280_GetPressure(BMP280_HandleTypeDef *bmp280)
+int32_t BMP280_GetPressure(BMP280_HandleTypeDef *hsensor)
 {
-	BMP280_ReadHandler read = bmp280->HAL.Read;
+	BMP280_ReadHandler read = hsensor->HAL.Read;
 	int32_t adcvalue;
 	uint8_t tmpreg[3];
 	read(BMP280_REG_PRESS_MSB, tmpreg, 3);
@@ -84,10 +84,10 @@ int32_t BMP280_GetPressure(BMP280_HandleTypeDef *bmp280)
 
 //*************************************************************************************//
 
-int32_t BMP280_CalculateTemperature(BMP280_HandleTypeDef *bmp280, int32_t adcvalue)
+int32_t BMP280_CalculateTemperature(BMP280_HandleTypeDef *hsensor, int32_t adcvalue)
 {
-	BMP280_CParamsTypeDef *cparams = &bmp280->CParams;
-	BMP280_IntVarsTypeDef *intvars = &bmp280->IntVars;
+	BMP280_CParamsTypeDef *cparams = &hsensor->CParams;
+	BMP280_IntVarsTypeDef *intvars = &hsensor->IntVars;
 	int32_t var1, var2, t, tfine;
 	var1 = (((adcvalue >> 3) - ((int32_t)cparams->dig_T1 << 1)) * ((int32_t)cparams->dig_T2)) >> 11;
 	var2 = (((((adcvalue >> 4) - ((int32_t)cparams->dig_T1)) * ((adcvalue >> 4) - ((int32_t)cparams->dig_T1))) >> 12) * ((int32_t)cparams->dig_T3)) >> 14;
@@ -97,10 +97,10 @@ int32_t BMP280_CalculateTemperature(BMP280_HandleTypeDef *bmp280, int32_t adcval
 	return (int32_t)t;
 }
 
-int32_t BMP280_CalculatePressure(BMP280_HandleTypeDef *bmp280, int32_t adcvalue)
+int32_t BMP280_CalculatePressure(BMP280_HandleTypeDef *hsensor, int32_t adcvalue)
 {
-	BMP280_CParamsTypeDef *cparams = &bmp280->CParams;
-	BMP280_IntVarsTypeDef *intvars = &bmp280->IntVars;
+	BMP280_CParamsTypeDef *cparams = &hsensor->CParams;
+	BMP280_IntVarsTypeDef *intvars = &hsensor->IntVars;
 	int64_t var1, var2, p;
 	var1 = ((int64_t)intvars->TFine) - 128000;
 	var2 = var1 * var1 * (int64_t)cparams->dig_P6;
