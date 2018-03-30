@@ -13,6 +13,7 @@ void MPU9250_InitGyroscope(MPU9250_HandleTypeDef *hsensor);
 void MPU9250_InitAccelerometer(MPU9250_HandleTypeDef *hsensor);
 void MPU9250_InitMagnetometer(MPU9250_HandleTypeDef *hsensor);
 void MPU9250_Reset(MPU9250_HandleTypeDef *hsensor);
+void MPU9250_DisableI2C(MPU9250_HandleTypeDef *hsensor);
 
 //*************************************************************************************//
 

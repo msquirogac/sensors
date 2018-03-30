@@ -14,32 +14,32 @@ typedef struct
 
 typedef struct
 {
-	uint8_t ODR;
-	uint8_t OSR;
-	uint8_t Range;
+  uint8_t ODR;
+  uint8_t OSR;
+  uint8_t Range;
 } BMI160G_InitTypeDef;
 
 typedef struct
 {
-	uint8_t US;
-	uint8_t ODR;
-	uint8_t OSR;
-	uint8_t Range;
+  uint8_t US;
+  uint8_t ODR;
+  uint8_t OSR;
+  uint8_t Range;
 } BMI160A_InitTypeDef;
 
 typedef struct
 {
-	const BMI160_ReadHandler Read;
-	const BMI160_WriteHandler Write;
-	const BMI160_DelayHandler Delay;
+  const BMI160_ReadHandler Read;
+  const BMI160_WriteHandler Write;
+  const BMI160_DelayHandler Delay;
 } BMI160_HalTypeDef;
 
 typedef struct
 {
-	BMI160_InitTypeDef Init;
-	BMI160G_InitTypeDef InitGyro;
-	BMI160A_InitTypeDef InitAccel;
-	BMI160_HalTypeDef HAL;
+  BMI160_InitTypeDef Init;
+  BMI160G_InitTypeDef InitGyro;
+  BMI160A_InitTypeDef InitAccel;
+  BMI160_HalTypeDef HAL;
 } BMI160_HandleTypeDef;
 
 #ifdef __cplusplus
