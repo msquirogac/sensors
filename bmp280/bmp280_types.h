@@ -13,6 +13,12 @@ typedef void (*BMP280_WriteHandler)(uint8_t Address, uint8_t *Buffer, size_t Num
 
 typedef struct
 {
+  const BMP280_ReadHandler Read;
+  const BMP280_WriteHandler Write;
+} BMP280_HalTypeDef;
+
+typedef struct
+{
   uint8_t TempOSR;
   uint8_t PressOSR;
   uint8_t Mode;
@@ -44,16 +50,10 @@ typedef struct
 
 typedef struct
 {
-  const BMP280_ReadHandler Read;
-  const BMP280_WriteHandler Write;
-} BMP280_HalTypeDef;
-
-typedef struct
-{
+  BMP280_HalTypeDef HAL;
   BMP280_InitTypeDef Init;
   BMP280_CParamsTypeDef CParams;
   BMP280_IntVarsTypeDef IntVars;
-  BMP280_HalTypeDef HAL;
 } BMP280_HandleTypeDef;
 
 #ifdef __cplusplus

@@ -10,6 +10,13 @@ typedef void (*LSM303C_DelayHandler)(uint32_t Delay);
 
 typedef struct
 {
+  const LSM303C_ReadHandler Read;
+  const LSM303C_WriteHandler Write;
+  const LSM303C_DelayHandler Delay;
+} LSM303C_HalTypeDef;
+
+typedef struct
+{
   uint8_t Temp;
   uint8_t ODR;
   uint8_t FS;
@@ -20,15 +27,8 @@ typedef struct
 
 typedef struct
 {
-  const LSM303C_ReadHandler Read;
-  const LSM303C_WriteHandler Write;
-  const LSM303C_DelayHandler Delay;
-} LSM303C_HalTypeDef;
-
-typedef struct
-{
-  LSM303C_InitTypeDef Init;
   LSM303C_HalTypeDef HAL;
+  LSM303C_InitTypeDef Init;
 } LSM303C_HandleTypeDef;
 
 #ifdef __cplusplus

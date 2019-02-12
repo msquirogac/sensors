@@ -12,6 +12,11 @@ typedef void (*MS5611_CommandHandler)(uint8_t Command, uint8_t *Buffer, size_t N
 
 typedef struct
 {
+  const MS5611_CommandHandler Command;
+} MS5611_HalTypeDef;
+
+typedef struct
+{
   uint8_t OSRSelectPress;
   uint8_t OSRSelectTemp;
 } MS5611_InitTypeDef;
@@ -37,15 +42,10 @@ typedef struct
 
 typedef struct
 {
-  const MS5611_CommandHandler Command;
-} MS5611_HalTypeDef;
-
-typedef struct
-{
+  MS5611_HalTypeDef HAL;
   MS5611_InitTypeDef Init;
   MS5611_CParamsTypeDef CParams;
   MS5611_IntVarsTypeDef IntVars;
-  MS5611_HalTypeDef HAL;
 } MS5611_HandleTypeDef;
 
 #ifdef __cplusplus

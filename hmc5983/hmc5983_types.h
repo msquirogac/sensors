@@ -9,6 +9,12 @@ typedef void (*HMC5983_WriteHandler)(uint8_t Address, uint8_t *Buffer, size_t Nu
 
 typedef struct
 {
+  const HMC5983_ReadHandler Read;
+  const HMC5983_WriteHandler Write;
+} HMC5983_HalTypeDef;
+
+typedef struct
+{
   uint8_t Temperature_Sensor; /* Temperature sensor enable/disable */
   uint8_t Average_Sample;     /* Select number of samples averaged */
   uint8_t Output_DataRate;    /* OUT data rate */
@@ -18,14 +24,8 @@ typedef struct
 
 typedef struct
 {
-  const HMC5983_ReadHandler Read;
-  const HMC5983_WriteHandler Write;
-} HMC5983_HalTypeDef;
-
-typedef struct
-{
-  HMC5983_InitTypeDef Init;
   HMC5983_HalTypeDef HAL;
+  HMC5983_InitTypeDef Init;
 } HMC5983_HandleTypeDef;
 
 #ifdef __cplusplus

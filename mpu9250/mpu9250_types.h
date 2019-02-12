@@ -14,6 +14,13 @@ typedef void (*MPU9250_DelayHandler)(uint32_t Delay);
 
 typedef struct
 {
+  const MPU9250_ReadHandler Read;
+  const MPU9250_WriteHandler Write;
+  const MPU9250_DelayHandler Delay;
+} MPU9250_HalTypeDef;
+
+typedef struct
+{
   uint8_t Clock_Source;     /* Clock source */
   uint8_t Sample_Rate_Div;  /* Sample Rate Divider */
 } MPU9250_InitTypeDef;
@@ -48,19 +55,12 @@ typedef struct
 
 typedef struct
 {
-  const MPU9250_ReadHandler Read;
-  const MPU9250_WriteHandler Write;
-  const MPU9250_DelayHandler Delay;
-} MPU9250_HalTypeDef;
-
-typedef struct
-{
+  MPU9250_HalTypeDef HAL;
   MPU9250_InitTypeDef Init;
   MPU9250G_InitTypeDef InitGyro;
   MPU9250A_InitTypeDef InitAccel;
   MPU9250M_InitTypeDef InitMagnet;
   MPU9250I_InitTypeDef InitInt;
-  MPU9250_HalTypeDef HAL;
 } MPU9250_HandleTypeDef;
 
 #ifdef __cplusplus

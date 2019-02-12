@@ -10,6 +10,13 @@ typedef void (*BMI160_DelayHandler)(uint32_t Delay);
 
 typedef struct
 {
+  const BMI160_ReadHandler Read;
+  const BMI160_WriteHandler Write;
+  const BMI160_DelayHandler Delay;
+} BMI160_HalTypeDef;
+
+typedef struct
+{
 } BMI160_InitTypeDef;
 
 typedef struct
@@ -29,17 +36,10 @@ typedef struct
 
 typedef struct
 {
-  const BMI160_ReadHandler Read;
-  const BMI160_WriteHandler Write;
-  const BMI160_DelayHandler Delay;
-} BMI160_HalTypeDef;
-
-typedef struct
-{
+  BMI160_HalTypeDef HAL;
   BMI160_InitTypeDef Init;
   BMI160G_InitTypeDef InitGyro;
   BMI160A_InitTypeDef InitAccel;
-  BMI160_HalTypeDef HAL;
 } BMI160_HandleTypeDef;
 
 #ifdef __cplusplus
